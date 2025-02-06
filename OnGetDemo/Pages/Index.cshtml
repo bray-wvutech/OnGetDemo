@@ -2,9 +2,25 @@
 @model IndexModel
 @{
     ViewData["Title"] = "Home page";
+    int param1 = 5;
 }
 
+<!-- these work but aren't the best of way of doing a link in Razor Pages -->
 <ul>
     <li><a href="~/Privacy?param1=2&param2=3">Privacy param1=2 param2=3</a></li>
     <li><a href="~/Privacy?param1=20&param2=30">Privacy param1=20 param2=30</a></li>
+</ul>
+
+<!-- what if we wanted to pass a variable as a parameter? -->
+<!-- you can make it work doing something like this -->
+<!-- but Razor Pages gives us a little nicer way of doing it -->
+<ul>
+    <li><a href="~/Privacy?param1=@param1&param2=3">Privacy param1=@param1 param2=3</a></li>
+</ul>
+
+<!-- instead we want to use some built in tag helpers -->
+<!-- https://learn.microsoft.com/en-us/aspnet/core/mvc/views/tag-helpers/built-in/anchor-tag-helper?view=aspnetcore-9.0 -->
+<ul>
+    <li><a asp-page="Privacy" asp-route-param1="9" asp-route-param2="10">The right way #1</a></li>
+    <li><a asp-page="Privacy" asp-route-param1="@param1" asp-route-param2="10">The right way with variable</a></li>
 </ul>
