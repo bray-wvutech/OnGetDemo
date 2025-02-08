@@ -24,3 +24,50 @@
     <li><a asp-page="Privacy" asp-route-param1="9" asp-route-param2="10">The right way #1</a></li>
     <li><a asp-page="Privacy" asp-route-param1="@param1" asp-route-param2="10">The right way with variable</a></li>
 </ul>
+
+<!-- we can also do a get using a form -->
+<form method="get" asp-page="Privacy" class="m-3">
+    <label>GET</label>
+    <!-- this requres we have a Param1 property for this view's view-model
+        even though we are sending the GET to the privacy page 
+        the names of the two variables need to match 
+    -->
+    <input type="text" asp-for="Param1" />   
+    <input type="submit" />
+</form>
+
+<!-- cross post 
+    NOTE: we can have multiple forms on the same page
+-->
+<form method="post" asp-page="Privacy" class="m-3">
+    <label>CROSS POST</label>
+    <input type="text" asp-for="Param1" />
+    <input type="submit" />
+</form>
+
+<!-- postback -->
+<form method="post" class="m-3">
+    <label>POSTBACK</label>
+    <input type="text" asp-for="Param1" />
+    <input type="submit" />
+</form>
+
+<!-- postback to handler1 -->
+<form method="post" class="m-3">
+    <label>handler1 POSTBACK</label>
+    <input type="text" asp-for="Param1" />
+    <input type="submit" asp-page-handler="handler1" />
+</form>
+
+<!-- postback to handler2 
+    NOTE: you can also use button instead of intput with type submit
+    the default appearance is different
+    and you can move the asp-page helper tag from the form to the button
+    which allows multiple buttons in the same form that submit different ways
+-->
+<form method="post" class="m-3">
+    <label>handler2 POSTS</label>
+    <input type="text" asp-for="Param1" />
+    <button type="submit" asp-page="Index" asp-page-handler="handler2">Postback</button>
+    <button type="submit" asp-page="Privacy" asp-page-handler="handler2">Privacy</button>
+</form>
