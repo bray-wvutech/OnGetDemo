@@ -31,12 +31,13 @@ namespace OnGetDemo.Pages
         {
             _logger.LogError($"OnPostHander1 Param1: {Param1}");
             // return the redirect
+            return RedirectToPage("Privacy");
             // if you want to pass variables you do so by making a new
             // anonymous object with the variable names in it
             // we could just say Param1 here instead of Param1 = Param1
             // since the names are the same
             // comma separate multiple values
-            return RedirectToPage("Privacy", new { Param1 = Param1 });
+            //return RedirectToPage("Privacy", new { Param1 = Param1 });
         }
 
         public void OnPostHandler2()

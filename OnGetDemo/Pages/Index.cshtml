@@ -2,6 +2,11 @@
 @model IndexModel
 @{
     ViewData["Title"] = "Home page";
+
+    // let me be clear this is not the right way to do this
+    // this is just for demo purposes
+    // we really want to put most of our variables in our view model (code behind)
+    // and we will moving forward
     int param1 = 5;
 }
 
@@ -28,7 +33,7 @@
 <!-- we can also do a get using a form -->
 <form method="get" asp-page="Privacy" class="m-3">
     <label>GET</label>
-    <!-- this requres we have a Param1 property for this view's view-model
+    <!-- this requires we have a Param1 property for this view's view-model
         even though we are sending the GET to the privacy page 
         the names of the two variables need to match 
     -->
