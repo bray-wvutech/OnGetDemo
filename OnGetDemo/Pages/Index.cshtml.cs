@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using OnGetDemo.Models;
 using System.ComponentModel.DataAnnotations;
 
 namespace OnGetDemo.Pages
@@ -8,6 +9,12 @@ namespace OnGetDemo.Pages
     {
         [BindProperty(SupportsGet = true)]
         public int Param1 { get; set; }
+
+        [BindProperty(SupportsGet = true)]
+        public int Param2 { get; set; }
+
+        [BindProperty]
+        public ParamsModel Params { get; set; }
 
         private readonly ILogger<IndexModel> _logger;
 
@@ -43,6 +50,22 @@ namespace OnGetDemo.Pages
         public void OnPostHandler2()
         {
             _logger.LogError($"OnPostHander2 Param1: {Param1}");
+        }
+
+        // the OnPost handler for our form that uses a Model
+        public IActionResult OnPostParamsModel()
+        {
+            _logger.LogError($"OnPostParamsModel Param1: {Params.Param1}");
+
+            // this just reloads the index page again, but it will have a PersonModel
+            // with a value for Param1
+            return Page();
+
+            // redirect using a POST
+            // we can pass our Params object to the next page since its properties
+            // line up with the properties the Privacy page is looking for
+            // Param1, Param2
+            //return RedirectToPagePreserveMethod("Privacy", null, Params);
         }
     }
 }

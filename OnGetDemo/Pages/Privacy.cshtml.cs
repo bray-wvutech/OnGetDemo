@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace OnGetDemo.Pages
 {
+    [BindProperties(SupportsGet = true)]
     public class PrivacyModel : PageModel
     {
         private readonly ILogger<PrivacyModel> _logger;
@@ -20,6 +21,12 @@ namespace OnGetDemo.Pages
 
         public void OnGet()
         {
+            _logger.LogError($"Privacy - OnGet - {Param1} - {Param2}");
+        }
+
+        public void OnPost()
+        {
+            _logger.LogError($"Privacy - OnPost - {Param1} - {Param2}");
         }
     }
 

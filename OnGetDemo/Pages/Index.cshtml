@@ -47,6 +47,7 @@
 <form method="post" asp-page="Privacy" class="m-3">
     <label>CROSS POST</label>
     <input type="text" asp-for="Param1" />
+    <input type="text" asp-for="Param2" />
     <input type="submit" />
 </form>
 
@@ -76,3 +77,21 @@
     <button type="submit" asp-page="Index" asp-page-handler="handler2">Postback</button>
     <button type="submit" asp-page="Privacy" asp-page-handler="handler2">Privacy</button>
 </form>
+
+<!-- here we are going to do a POST and use a Model to contain our data -->
+<form method="post" class="m-3">
+    <!-- if PersonModel is null it will crash if you reference it -->
+    <!-- if we just reload this page instead of doing a redirect the PersonModel will not be null -->
+    @if (Model.Params != null)
+    {
+        <label>POSTBACK using a MODEL (Param1 value: @Model.Params.Param1)</label>
+    }
+    else
+    {
+        <label>POSTBACK using a MODEL</label>
+    }
+    <input type="text" asp-for="Params.Param1" />
+    <button type="submit" asp-page="Index" asp-page-handler="ParamsModel">Submit</button>
+</form>
+
+
