@@ -34,8 +34,8 @@
 <form method="get" asp-page="Privacy" class="m-5">
     <h5>GET</h5>
     <!-- this requires we have a Param1 property for this view's view-model
-        even though we are sending the GET to the privacy page 
-        the names of the two variables need to match 
+    even though we are sending the GET to the privacy page 
+    the names of the two variables need to match 
     -->
     <label asp-for="Param1"></label>
     <input type="text" asp-for="Param1" />   
@@ -43,7 +43,7 @@
 </form>
 
 <!-- cross post 
-    NOTE: we can have multiple forms on the same page
+NOTE: we can have multiple forms on the same page
 -->
 <form method="post" asp-page="Privacy" class="m-5">
     <h5>CROSS POST</h5>
@@ -71,10 +71,10 @@
 </form>
 
 <!-- postback to handler2 
-    NOTE: you can also use button instead of intput with type submit
-    the default appearance is different
-    and you can move the asp-page helper tag from the form to the button
-    which allows multiple buttons in the same form that submit different ways
+NOTE: you can also use button instead of intput with type submit
+the default appearance is different
+and you can move the asp-page helper tag from the form to the button
+which allows multiple buttons in the same form that submit different ways
 -->
 <form method="post" class="m-5">
     <h5>handler2 POSTS</h5>
@@ -90,7 +90,7 @@
     <!-- if we just reload this page instead of doing a redirect the PersonModel will not be null -->
     @if (Model.Params != null)
     {
-         <h5>POSTBACK using a MODEL (Param1 value: @Model.Params.Param1)</h5>
+        <h5>POSTBACK using a MODEL (Param1 value: @Model.Params.Param1)</h5>
     }
     else
     {
@@ -101,4 +101,11 @@
     <button type="submit" asp-page="Index" asp-page-handler="ParamsModel">Submit</button>
 </form>
 
-
+<!-- wanted to add a demo of a for loop formatting a string for your assignment -->
+<div class="m-5">
+@for(int i = 0; i < 3; i++)
+{
+    string msg = $"i = {i}";
+    <div>@msg</div>
+}
+</div>
