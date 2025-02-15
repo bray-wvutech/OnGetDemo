@@ -14,7 +14,7 @@ namespace OnGetDemo.Pages
         public int Param2 { get; set; }
 
         [BindProperty]
-        public ParamsModel Params { get; set; }
+        public ParamsModel Params { get; set; } = new();
 
         private readonly ILogger<IndexModel> _logger;
 
@@ -59,13 +59,15 @@ namespace OnGetDemo.Pages
 
             // this just reloads the index page again, but it will have a PersonModel
             // with a value for Param1
-            return Page();
+            //return Page();
+
+            //return RedirectToPage("Privacy", new { Param1=Params.Param1, Param2=34});//Params);
 
             // redirect using a POST
             // we can pass our Params object to the next page since its properties
             // line up with the properties the Privacy page is looking for
             // Param1, Param2
-            //return RedirectToPagePreserveMethod("Privacy", null, Params);
+            return RedirectToPagePreserveMethod("Privacy", null, Params);
         }
     }
 }

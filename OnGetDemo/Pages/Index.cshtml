@@ -11,7 +11,7 @@
 }
 
 <!-- these work but aren't the best of way of doing a link in Razor Pages -->
-<ul>
+<ul class="m-5">
     <li><a href="~/Privacy?param1=2&param2=3">Privacy param1=2 param2=3</a></li>
     <li><a href="~/Privacy?param1=20&param2=30">Privacy param1=20 param2=30</a></li>
 </ul>
@@ -19,24 +19,25 @@
 <!-- what if we wanted to pass a variable as a parameter? -->
 <!-- you can make it work doing something like this -->
 <!-- but Razor Pages gives us a little nicer way of doing it -->
-<ul>
+<ul class="m-5">
     <li><a href="~/Privacy?param1=@param1&param2=3">Privacy param1=@param1 param2=3</a></li>
 </ul>
 
 <!-- instead we want to use some built in tag helpers -->
 <!-- https://learn.microsoft.com/en-us/aspnet/core/mvc/views/tag-helpers/built-in/anchor-tag-helper?view=aspnetcore-9.0 -->
-<ul>
+<ul class="m-5">
     <li><a asp-page="Privacy" asp-route-param1="9" asp-route-param2="10">The right way #1</a></li>
     <li><a asp-page="Privacy" asp-route-param1="@param1" asp-route-param2="10">The right way with variable</a></li>
 </ul>
 
 <!-- we can also do a get using a form -->
-<form method="get" asp-page="Privacy" class="m-3">
-    <label>GET</label>
+<form method="get" asp-page="Privacy" class="m-5">
+    <h5>GET</h5>
     <!-- this requires we have a Param1 property for this view's view-model
         even though we are sending the GET to the privacy page 
         the names of the two variables need to match 
     -->
+    <label asp-for="Param1"></label>
     <input type="text" asp-for="Param1" />   
     <input type="submit" />
 </form>
@@ -44,23 +45,27 @@
 <!-- cross post 
     NOTE: we can have multiple forms on the same page
 -->
-<form method="post" asp-page="Privacy" class="m-3">
-    <label>CROSS POST</label>
+<form method="post" asp-page="Privacy" class="m-5">
+    <h5>CROSS POST</h5>
+    <label asp-for="Param1"></label>
     <input type="text" asp-for="Param1" />
+    <label asp-for="Param2"></label>
     <input type="text" asp-for="Param2" />
     <input type="submit" />
 </form>
 
 <!-- postback -->
-<form method="post" class="m-3">
-    <label>POSTBACK</label>
+<form method="post" class="m-5">
+    <h5>POSTBACK</h5>
+    <label asp-for="Param1"></label>
     <input type="text" asp-for="Param1" />
     <input type="submit" />
 </form>
 
 <!-- postback to handler1 -->
-<form method="post" class="m-3">
-    <label>handler1 POSTBACK</label>
+<form method="post" class="m-5">
+    <h5>handler1 POSTBACK</h5>
+    <label asp-for="Param1"></label>
     <input type="text" asp-for="Param1" />
     <input type="submit" asp-page-handler="handler1" />
 </form>
@@ -71,25 +76,27 @@
     and you can move the asp-page helper tag from the form to the button
     which allows multiple buttons in the same form that submit different ways
 -->
-<form method="post" class="m-3">
-    <label>handler2 POSTS</label>
+<form method="post" class="m-5">
+    <h5>handler2 POSTS</h5>
+    <label asp-for="Param1"></label>
     <input type="text" asp-for="Param1" />
     <button type="submit" asp-page="Index" asp-page-handler="handler2">Postback</button>
     <button type="submit" asp-page="Privacy" asp-page-handler="handler2">Privacy</button>
 </form>
 
 <!-- here we are going to do a POST and use a Model to contain our data -->
-<form method="post" class="m-3">
+<form method="post" class="m-5">
     <!-- if PersonModel is null it will crash if you reference it -->
     <!-- if we just reload this page instead of doing a redirect the PersonModel will not be null -->
     @if (Model.Params != null)
     {
-        <label>POSTBACK using a MODEL (Param1 value: @Model.Params.Param1)</label>
+         <h5>POSTBACK using a MODEL (Param1 value: @Model.Params.Param1)</h5>
     }
     else
     {
-        <label>POSTBACK using a MODEL</label>
+        <h5>POSTBACK using a MODEL</h5>
     }
+    <label asp-for="Params.Param1"></label>
     <input type="text" asp-for="Params.Param1" />
     <button type="submit" asp-page="Index" asp-page-handler="ParamsModel">Submit</button>
 </form>
